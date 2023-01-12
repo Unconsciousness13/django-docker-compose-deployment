@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 ALLOWED_HOSTS.extend(
     filter(
         None,
@@ -113,11 +113,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/static/'
-MEDIA_URL = 'static/media/'
+STATIC_URL = os.path.join(BASE_DIR, 'static/static/')
+MEDIA_URL = os.path.join(BASE_DIR, 'static/media/')
 
-STATIC_ROOT = 'vol/web/static'
-MEDIA_ROOT = 'vol/web/media'
+STATIC_ROOT = os.path.join(BASE_DIR, 'vol/web/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'vol/web/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
