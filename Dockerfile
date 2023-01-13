@@ -1,7 +1,7 @@
-FROM python:3.9-alpine
+FROM python:3.9-alpine3.13
 LABEL maintainer="pako.es"
 
-ENV PYTHONUNBUFFED 1
+ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
 COPY ./app /app
@@ -17,16 +17,15 @@ RUN python -m venv /py && \
         build-base postgresql-dev musl-dev linux-headers && \
     /py/bin/pip install -r /requirements.txt && \
     apk del .tmp-deps && \
+    adduser --disabled-password --no-create-home app && \
     mkdir -p /vol/web/static && \
     mkdir -p /vol/web/media && \
-    chown -R root:root /vol && \
+    chown -R app:app /vol && \
     chmod -R 755 /vol && \
     chmod -R +x /scripts
 
-
-
 ENV PATH="/scripts:/py/bin:$PATH"
 
-USER root
+USER app
 
 CMD ["run.sh"]

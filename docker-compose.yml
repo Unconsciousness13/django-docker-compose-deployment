@@ -1,4 +1,4 @@
-version: '3.11'
+version: '3.9'
 
 services:
   app:
@@ -14,17 +14,18 @@ services:
       - ./app:/app
       - ./data/web:/vol/web
     environment:
-      - SECRET_KEY=butatamakq-12-ragaichushkivboba
+      - SECRET_KEY=devsecretkey
       - DEBUG=1
       - DB_HOST=db
-      - DB_NAME=dcddb
-      - DB_USER=root
-      - DB_PASS=1234
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
     depends_on:
       - db
+
   db:
-   image: postgres:14.3
-   environment:
-      - POSTGRES_DB=dcddb
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=1234
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
